@@ -1,6 +1,5 @@
 package pageObjects;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import org.openqa.selenium.By;
@@ -12,56 +11,38 @@ import static com.codeborne.selenide.Selenide.$;
 public class HomePage {
     private SelenideElement header = $("header");
 
-
-    @Step("Открываем ветку админа")
-    public HomePage openAdminApp() {
-        Selenide.open("https://dev16.arcdev.ru",
-                "",
-                "fw.develop",
-                "tP(oi*EYMH3pTK");
-        return this;
-    }
-
-    @Step("Открываем ветку менеджера")
-    public HomePage openManagerApp() {
-        Selenide.open("https://dev17.arcdev.ru",
-                "",
-                "fw.develop",
-                "tP(oi*EYMH3pTK");
-        return this;
-    }
-
-    public HomePage openCompany() {
+    @Step("Открываем вкладку группы")
+    public void openCompany() {
         header.$(By.linkText("Группы")).click();
-        return this;
     }
 
+    @Step("Открываем вкладку участники")
     public void openMembers() {
         header.$(By.linkText("Участники")).click();
     }
 
-    public HomePage openStatisticProgram() {
+    @Step("Открываем вкладку статистика программы")
+    public void openStatisticProgram() {
         header.$(By.linkText("Статистика программы")).click();
-        return this;
     }
 
-    public HomePage openManagerProfile() {
-        header.$("").click();
-        return this;
+    @Step("Открываем вкладку профиля менеджера")
+    public void openManagerProfile() {
+        header.$("Менеджер").click();
     }
 
-    public HomePage openAdminProfile() {
+    @Step("Открываем вкладку профиля Администратора")
+    public void openAdminProfile() {
         header.$(By.linkText("Администратор")).click();
-        return this;
     }
 
-    public HomePage openGlobalStatistic() {
+    @Step("Открываем вкладку общая статистика")
+    public void openGlobalStatistic() {
         header.$("").click();
-        return this;
     }
 
-    public HomePage openDocuments() {
+    @Step("Открываем вкладку документы")
+    public void openDocuments() {
         header.$(By.linkText("Документы")).click();
-        return this;
     }
 }
