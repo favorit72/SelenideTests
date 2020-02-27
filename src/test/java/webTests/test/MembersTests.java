@@ -2,9 +2,11 @@ package webTests.test;
 
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import pageObjects.ActionWithMembers;
 import pageObjects.HomePage;
 import pageObjects.Product;
+import pageObjects.Table;
 import utils.BaseTest;
 import utils.Listener;
 import utils.RetryAnalyzerCount;
@@ -21,14 +23,18 @@ public class MembersTests extends BaseTest {
     public void addMemberTest() throws InterruptedException {
         product.openAdminApp();
         homePage.openMembers();
-        members.addMember(Strings.EMAIL, "");
+        members.addIntoSystem(Strings.EMAIL, "");
+        Thread.sleep(4000);
     }
 
-//    @Test
-//    public void addMemberToGroup() {
-//        product.openAdminApp();
-//        homePage.openGroups();
-//        table.selectFirstGroup(1);
-//        members.addMember(Strings.EMAIL, "");
-//    }
+    @Test
+    public void addMemberToGroupTest() throws InterruptedException {
+        product.openAdminApp();
+        homePage.openGroups();
+        table.selectLineByIndex(1);
+        members.addIntoGroup(Strings.EMAIL, "");
+        Thread.sleep(4000);
+
+
+    }
 }
