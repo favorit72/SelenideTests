@@ -1,5 +1,7 @@
 package webTests.test;
 
+import com.codeborne.selenide.CollectionCondition;
+
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -20,21 +22,26 @@ public class MembersTests extends BaseTest {
     Table table = new Table();
 
     @Test(retryAnalyzer = RetryAnalyzerCount.class)
-    public void addMemberTest() throws InterruptedException {
+    public void addMemberIntoSystem() {
         product.openAdminApp();
         homePage.openMembers();
         members.addIntoSystem(Strings.EMAIL, "");
-        Thread.sleep(4000);
+        table.size().shouldHave(CollectionCondition.sizeLessThanOrEqual(5));
     }
 
-    @Test
-    public void addMemberToGroupTest() throws InterruptedException {
+    @Test(retryAnalyzer = RetryAnalyzerCount.class)
+    public void addMemberToGroup() {
         product.openAdminApp();
         homePage.openGroups();
         table.selectLineByIndex(1);
         members.addIntoGroup(Strings.EMAIL, "");
-        Thread.sleep(4000);
+        table.size().shouldHave(CollectionCondition.sizeLessThanOrEqual(5));
+    }
 
-
+    @Test
+    public void filterMembersByGroup() {
+        product.openAdminApp();
+        homePage.openMembers();
+        members.filter("Группа");
     }
 }

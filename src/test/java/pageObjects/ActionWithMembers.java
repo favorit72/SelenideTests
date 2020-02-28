@@ -1,6 +1,5 @@
 package pageObjects;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
 import java.text.SimpleDateFormat;
@@ -8,16 +7,18 @@ import java.util.Date;
 
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.ByText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class ActionWithMembers {
-    private SelenideElement actionsContainer = $(".flex.align-items-center.justify-content-space-between.mt-5");
-    private SelenideElement actionsContainerForGroup = $(".flex.justify-content-flex-start.align-items-center.mt-8");
+    private SelenideElement actionsContainer = $(".mt-5");
+    private SelenideElement actionsContainerForGroup = $(".mt-8");
 
 
     @Step("добавляем участника в систему")
     public void addIntoSystem(String email, String personnelNumber) {
-        actionsContainer.$$("button").findBy(Condition.text("Добавить")).click();
+        actionsContainer.$$("button").findBy(text("Добавить")).click();
 
         SimpleDateFormat formatForDate = new SimpleDateFormat("hhmmss");
         personnelNumber = formatForDate.format(new Date());
@@ -39,5 +40,11 @@ public class ActionWithMembers {
                 .setFor("Корпоративный E-mail", email)
                 .setFor("Табельный номер", personnelNumber)
                 .submit();
+    }
+
+    @Step("фильтруем участников по типу {type}")
+    public void filter(String type) {
+        actionsContainer.$(new ByText("Фильтр")).click();
+        new ChooseFilter().byType(type);
     }
 }
