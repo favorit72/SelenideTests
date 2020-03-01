@@ -1,4 +1,4 @@
-package pageObjects;
+package widgets;
 
 import com.codeborne.selenide.SelenideElement;
 
