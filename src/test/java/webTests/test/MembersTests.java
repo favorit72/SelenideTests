@@ -6,34 +6,31 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import configs.BaseTest;
-import pages.HomePage;
-import pages.Product;
 import utils.Listener;
 import utils.RetryAnalyzerCount;
 import utils.data.Strings;
-import widgets.ActionWithMembers;
-import widgets.Table;
 
 @Listeners(Listener.class)
 public class MembersTests extends BaseTest {
-    Product product = new Product();
-    HomePage homePage = new HomePage();
-    ActionWithMembers members = new ActionWithMembers();
-    Table table = new Table();
 
     @Test(retryAnalyzer = RetryAnalyzerCount.class)
     public void addMemberIntoSystem() {
         product.openAdminApp();
         homePage.openMembers();
         members.addIntoSystem(Strings.EMAIL);
+        //в таблице есть чекбокс и пустые дивы
+        table.shouldHaveColumnHeaders("", "№", "ФИО", "Контакты", "Группа", "Размер компенсации, руб.", "Дата заключения договора", "", "");
+
     }
 
     @Test(retryAnalyzer = RetryAnalyzerCount.class)
     public void addMemberToGroup() {
         product.openAdminApp();
         homePage.openGroups();
-        table.selectRowByIndex(1);
+        table.shouldHaveColumnHeaders("Название группы", "Размер компенсации, руб.", "Кол-во участников", "");
+        table.selectRowByName("Топ менеджеры");
         members.addIntoGroup(Strings.EMAIL);
+        table.shouldHaveColumnHeaders("", "№", "ФИО", "Контакты", "Табельный номер");
     }
 
     @Test
@@ -55,7 +52,6 @@ public class MembersTests extends BaseTest {
         product.openAdminApp();
         homePage.openMembers();
         table.size().shouldHave(CollectionCondition.sizeLessThanOrEqual(5));
-        //В хедере таблицы есть пустые ячейки
-        table.shouldHaveColumnHeaders("№", "ФИО", "Контакты", "Группа", "Размер компенсации, руб.", "Дата заключения договора", "", "");
+        table.shouldHaveColumnHeaders("", "№", "ФИО", "Контакты", "Группа", "Размер компенсации, руб.", "Дата заключения договора", "", "");
     }
 }

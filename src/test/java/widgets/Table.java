@@ -41,9 +41,7 @@ public class Table {
 
     @Step("Проверяем заголовки таблицы")
     public void shouldHaveColumnHeaders(String... texts) {
-        List<String> headerTexts = new ArrayList<String>();
-        headerTexts.add("");
-        headerTexts.addAll(asList(texts));
+        List<String> headerTexts = new ArrayList<String>(asList(texts));
         headers().shouldHave(exactTexts(headerTexts.toArray(new String[0])));
     }
 }
