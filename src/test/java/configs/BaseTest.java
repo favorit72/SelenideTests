@@ -1,6 +1,7 @@
-package utils;
+package configs;
 
 import com.codeborne.selenide.Configuration;
+
 import org.testng.annotations.BeforeClass;
 
 public class BaseTest {
