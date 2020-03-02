@@ -45,4 +45,9 @@ public class HomePage {
     public void openDocuments() {
         header.$(By.linkText("Документы")).click();
     }
+
+    @Step("Открываем вкладку список компаний")
+    public void openCompanies() {
+        header.$(By.linkText("Список компаний")).click();
+    }
 }
