@@ -12,8 +12,8 @@ public class HomePage {
     private SelenideElement header = $("header");
 
     @Step("Открываем вкладку группы")
-    public void openGroups() {
-        header.$(By.linkText("Группы")).click();
+    public void openProgramAndSettings() {
+        header.$(By.linkText("Программа и настройки")).click();
     }
 
     @Step("Открываем вкладку участники")

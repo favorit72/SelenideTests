@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import configs.BaseTest;
 
 
-public class companyTests extends BaseTest {
+public class CompanyTests extends BaseTest {
 
     @Test
     public void addCompany() {

@@ -18,22 +18,19 @@ public class MembersTests extends BaseTest {
         product.openAdminApp();
         homePage.openMembers();
         members.addIntoSystem(Strings.EMAIL);
-        //в таблице есть чекбокс и пустые дивы
-        table.shouldHaveColumnHeaders("", "№", "ФИО", "Контакты", "Группа", "Размер компенсации, руб.", "Дата заключения договора", "", "");
-
     }
 
     @Test(retryAnalyzer = RetryAnalyzerCount.class)
     public void addMemberToGroup() {
         product.openAdminApp();
-        homePage.openGroups();
+        homePage.openProgramAndSettings();
         table.shouldHaveColumnHeaders("Название группы", "Размер компенсации, руб.", "Кол-во участников", "");
         table.selectRowByName("Топ менеджеры");
         members.addIntoGroup(Strings.EMAIL);
         table.shouldHaveColumnHeaders("", "№", "ФИО", "Контакты", "Табельный номер");
     }
 
-    @Test
+    @Test(enabled = false)
     public void filterMembersByGroup() {
         product.openAdminApp();
         homePage.openMembers();
@@ -48,10 +45,11 @@ public class MembersTests extends BaseTest {
     }
 
     @Test
-    public void listMembers() {
+    public void listMembersTest() {
         product.openAdminApp();
         homePage.openMembers();
-        table.size().shouldHave(CollectionCondition.sizeLessThanOrEqual(5));
-        table.shouldHaveColumnHeaders("", "№", "ФИО", "Контакты", "Группа", "Размер компенсации, руб.", "Дата заключения договора", "", "");
+        table.size().shouldHave(CollectionCondition.sizeLessThanOrEqual(10));
+        //в таблице есть чекбокс и пустые дивы
+        table.shouldHaveColumnHeaders("", "ФИО", "Контакты", "Группа", "Компенсация", "Статус договора", "");
     }
 }
